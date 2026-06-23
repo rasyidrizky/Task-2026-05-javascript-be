@@ -2,7 +2,8 @@ const { Sequelize, DataTypes, Model } = require('sequelize');
 
 const sequelize = new Sequelize('task_db', 'postgres', 'Witherboss', {
     host: 'localhost',
-    dialect: 'postgres'
+    dialect: 'postgres',
+    // logging: false
 });
 
 module.exports = sequelize;
