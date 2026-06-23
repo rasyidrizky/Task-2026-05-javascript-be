@@ -101,6 +101,26 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Get User by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/users/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "users",
+            "1"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }

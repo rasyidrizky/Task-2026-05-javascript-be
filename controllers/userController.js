@@ -67,7 +67,7 @@ const updateUsername = async (req, res, next) => {
             });
         }
         
-        lastUsername = user.username
+        const lastUsername = user.username
         user.username = username;
         await user.save();
 
@@ -81,9 +81,31 @@ const updateUsername = async (req, res, next) => {
     }
 }
 
+const getUserbyId = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findByPk(id);
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                error: 'User not found'
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            data: user
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports = {
     getAllUsers,
     createUser,
     deleteUser,
     updateUsername,
+    getUserbyId
 }

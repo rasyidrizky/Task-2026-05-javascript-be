@@ -30,4 +30,29 @@ function validateUser (req, res, next) {
     next();
 }
 
-module.exports = validateUser;
+function validateUpdate(req, res, next) {
+    const { username } = req.body;
+    const errors = [];
+
+    if (!username) {
+        errors.push('Username cannot be empty');
+    } else if (typeof username !== 'string') {
+        errors.push('Username must be text');
+    } else if (username.trim().length < 3) {
+        errors.push('Username must be 3 characters or more');
+    }
+
+    if (errors.length > 0) {
+        return res.status(400).json({
+            success: false,
+            errors: errors
+        });
+    }
+
+    next();
+}
+
+module.exports = {
+    validateUser,
+    validateUpdate,
+};

@@ -6,6 +6,7 @@ const swaggerOptions = {
         info: {
             title: 'Task API',
             version: '1.0.0',
+            description: 'REST API documentation'
         },
         servers: [{ url: 'http://localhost:5000' }],
         paths: {
@@ -13,11 +14,12 @@ const swaggerOptions = {
                 get: {
                     summary: 'Return all users',
                     responses: {
-                        '200': { description: 'OK' }
+                        '200': { description: 'OK' },
+                        '500': { description: 'Internal server error' }
                     }
                 },
                 post: {
-                    summary: 'Create new user',
+                    summary: 'Create a new user',
                     requestBody: {
                         required: true,
                         content: {
@@ -34,22 +36,21 @@ const swaggerOptions = {
                     },
                     responses: {
                         '201': { description: 'OK' },
-                        '400': { description: 'Invalid input' }
+                        '400': { description: 'Invalid input' },
+                        '500': { description: 'Internal server error' }
                     }
                 }
             },
             '/users/{id}': {
-                delete: {
-                    summary: 'Delete user by id',
+                get: {
+                    summary: 'Return a user by ID',
                     parameters: [
                         {
                             in: 'path',
                             name: 'id',
                             required: true,
-                            schema: {
-                                type: 'integer'
-                            },
-                            description: 'The ID of the user you want to delete'
+                            schema: { type: 'integer' },
+                            description: 'The ID of the user to retrieve'
                         }
                     ],
                     responses: {
@@ -59,14 +60,14 @@ const swaggerOptions = {
                     }
                 },
                 put: {
-                    summary: 'Update username by id',
+                    summary: 'Update username by ID',
                     parameters: [
                         {
                             in: 'path',
                             name: 'id',
                             required: true,
                             schema: { type: 'integer' },
-                            description: 'The ID of the user you want to update'
+                            description: 'The ID of the user to update'
                         }
                     ],
                     requestBody: {
@@ -85,7 +86,27 @@ const swaggerOptions = {
                     responses: {
                         '200': { description: 'OK' },
                         '400': { description: 'Invalid input' },
-                        '404': { description: 'User not found' }
+                        '404': { description: 'User not found' },
+                        '500': { description: 'Internal server error' }
+                    }
+                },
+                delete: {
+                    summary: 'Delete user by ID',
+                    parameters: [
+                        {
+                            in: 'path',
+                            name: 'id',
+                            required: true,
+                            schema: {
+                                type: 'integer'
+                            },
+                            description: 'The ID of the user to delete'
+                        }
+                    ],
+                    responses: {
+                        '200': { description: 'OK' },
+                        '404': { description: 'User not found' },
+                        '500': { description: 'Internal server error' }
                     }
                 }
             }

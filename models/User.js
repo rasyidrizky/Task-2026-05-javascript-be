@@ -11,18 +11,20 @@ User.init(
             primaryKey: true,
         },
         username: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING, 
             allowNull: false,
         },
         email: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING, 
             allowNull: false,
             unique: true,
         }
     },
     {
         sequelize,
-        modelName: 'user',
+        modelName: 'User',     // Nama model untuk digunakan di dalam kode JavaScript
+        tableName: 'users',     // Nama tabel spesifik di dalam PostgreSQL
+        freezeTableName: true  // Mencegah Sequelize menambahkan huruf 's' di akhir nama tabel
     }
 );
 
